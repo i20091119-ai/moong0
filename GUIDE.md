@@ -4,7 +4,8 @@
 코드는 `button2/` 폴더에 완성되어 있음. 받아서 보드에 올리고 실행하는 과정을 체험.
 
 - 소요 시간: 30~40분 (보드 업데이트가 뜨면 +10분)
-- 2026-10-19 실제 보드에서 같은 순서로 동작 확인
+- 2026-10-19 강사 보드에서 같은 순서로 동작 확인 (기록: `instructor/board-log-2026-10-19.md`)
+- 진행하면서 `STATUS.md` 에 기록
 
 ---
 
@@ -35,8 +36,35 @@
 | 보드에 이름 스티커 | 보드·허브에 `uno07` |
 | 연수생 노트북 SSH 별칭은 자기 보드로 | `HostName uno07.local` |
 
-- 보드 이름은 App Lab 왼쪽 위 보드 이름 옆 `…` 메뉴(보드 설정)에서 확인·변경. 처음 설정할 때 정하는 이름
 - 이름 변경은 연수 전에 강사가 일괄로 하는 것을 권장
+- 이름 규칙: 영문 소문자·숫자·하이픈(`-`)만. 한글·공백·밑줄 금지
+
+### 보드 이름 바꾸는 법
+
+**방법 1 — App Lab**
+
+1. App Lab 왼쪽 위 보드 이름 옆 `…` 누름
+2. 이름 변경(또는 보드 설정) 메뉴에서 새 이름 입력
+3. 보드 재시작 후 App Lab이 새 이름으로 다시 연결
+
+메뉴 이름은 App Lab 버전에 따라 다를 수 있음.
+
+**방법 2 — 명령어** (`…` 메뉴에 없을 때)
+
+```powershell
+ssh arduino@현재이름.local "sudo hostnamectl set-hostname uno07"
+ssh arduino@현재이름.local "sudo reboot"
+```
+
+- `sudo` 비밀번호 = 보드 비밀번호
+- 1~2분 뒤 `ssh arduino@uno07.local` 로 접속 확인
+
+**바꾼 뒤 할 일**
+
+- `%USERPROFILE%\.ssh\config` 의 `HostName` 을 새 이름으로
+- 접속 주소: `http://새이름.local:7000`
+- 보드·허브에 이름 스티커
+- 보드 소프트웨어가 오래된 경우 이름 변경 후 `.local` 접속이 안 될 수 있음 → App Lab에서 보드 업데이트 먼저
 - IP 주소는 공유기가 보드마다 다르게 주므로 겹치지 않음. 단 바뀔 수 있음
 - 웹 화면 포트 7000은 보드마다 따로라 같은 번호여도 문제없음
 
@@ -121,19 +149,22 @@ Host uno
 
 ```powershell
 cd $HOME\Documents
-git clone https://github.com/i20091119-ai/moong0.git
-cd moong0
+git clone <강사가 준 레포 주소>
+cd <레포 이름>
 dir button2
 ```
 
+- 예: `git clone https://github.com/계정/uno-button-07.git` → `cd uno-button-07`
+- 비공개 레포면 GitHub 로그인 창 → 로그인
+
 - `app.yaml`, `assets`, `python`, `sketch` 4개 보이면 성공
-- 저장소 접근이 안 되면 강사에게 ZIP 받아서 `문서\moong0`에 압축 해제
+- 레포 접근이 안 되면 강사에게 ZIP 받아서 `문서`에 압축 해제
 
 ---
 
 ## 5. 보드로 복사
 
-보드와 같은 Wi-Fi로 돌아와서, `moong0` 폴더에서:
+보드와 같은 Wi-Fi로 돌아와서, 받은 레포 폴더에서:
 
 ```powershell
 scp -r button2 uno:~/ArduinoApps/
@@ -267,7 +298,7 @@ assets/app.js  (브라우저)
 
 ## 12. Claude Code로 진행하려면
 
-노트북에서 `moong0` 폴더를 Claude Code로 열면 `CLAUDE.md`(작업 지시서)를 읽고 같은 순서로 진행.
+노트북에서 받은 레포 폴더를 Claude Code로 열면 `CLAUDE.md`(작업 지시서)를 읽고 같은 순서로 진행.
 
 - 클라우드(웹) Claude Code는 보드에 접속 못 함 → 노트북에서 실행되는 Claude Code 사용
 - 예: "button2 앱 보드에서 실행해줘. 실행 중인 다른 앱은 멈춰도 됨."
@@ -281,4 +312,4 @@ assets/app.js  (브라우저)
   - `core-and-foundational/08-web-ui-basics/02-data-transmission`
   - `core-and-foundational/08-web-ui-basics/03-button-action`
   - `core-and-foundational/02-led-matrix/01-led-matrix-frame-mcu`
-- 강사 보드 기록: `STATUS.md`
+- 강사 보드 기록: `instructor/board-log-2026-10-19.md`
