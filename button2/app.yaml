@@ -1,0 +1,6 @@
+name: Button2
+icon: 🔘
+description: 버튼 2개(A=D2, B=D3) 누름을 웹 화면에 표시하는 연습 앱
+
+bricks:
+  - arduino:web_ui

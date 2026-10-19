@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button2</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>버튼 2개 연습</h1>
+    <div id="status" class="status off">연결 안 됨</div>
+    <div class="boxes">
+      <div id="box-A" class="box">
+        <div class="label">A</div>
+        <div id="count-A" class="count">0</div>
+      </div>
+      <div id="box-B" class="box">
+        <div class="label">B</div>
+        <div id="count-B" class="count">0</div>
+      </div>
+    </div>
+    <button id="reset">초기화</button>
+
+    <script src="libs/socket.io.min.js"></script>
+    <script src="libs/arduino.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
